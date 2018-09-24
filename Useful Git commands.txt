@@ -1,0 +1,162 @@
+# Basic configuration ---------------------------------------
+
+git --version
+
+git config --global user.name data_wanderer
+
+git config --global user.email xx@hotmail.com
+
+git config user.name
+
+cd ..  (change to upper directory)
+
+cd <Directory> (go to child directory)
+
+ls
+dir
+
+mkdir <New directory name>
+
+touch <Name of new file to create>.extension
+
+<Program name> <File I want to open with the Program>
+
+rm <Name of file I  want to erase>
+
+rm -rf .git   (elimina el trackeo del directorio en GIT)
+
+# Basic Git commands ----------------------------------------
+git status (Verify the status of files in a REPO)
+
+git add <Name fo file to add to staging area>.extension
+git add .   (loads every file to the staging area)
+
+git rm --cached <Name of file to remove from staging area>.extension
+
+git commit -m "<Insert here relevant title of changes made>"
+
+git log   (history of commits)
+git log --oneline   (small summary)
+
+# Verifiying older commited versions of the project: --------
+
+git checkout <Insert Commit ID found in git log>
+git checkout master  (go back to current master branch)
+
+git revert <Insert Commit ID found in git log>
+# OJO: es importante usar ":wq" en la linea negra abajo de
+# la pantalla que aparece durante el revert para salir y
+# efectuar el revert con éxito
+
+# Command below mantains the changes in git status so you
+# can commit all of them in a single commit (therefore, 
+# reverting the reset if it is needed). BUT if you add
+# "--hard" at the end, it will erase ANY changes and not
+# record them (theyr will be lost forever):
+
+git reset <Insert Commit ID found in git log>  (dangerous)
+git reset <Same as above> --hard
+
+# Creating branches -----------------------------------------
+git branch <Insert name of new branch> (create new branch, but
+				    not moves to it yet)
+
+git branch -a (show all the branches, but just show them)
+
+git checkout <Insert name of existing branch> (switch to that branch)
+
+git branch -d <Insert name of branch to delete> (deletes only if branch
+						 is already merged)
+git branch -D <Insert name of branch to delete> (forces deletion of branch)
+
+git checkout -b <Insert name of new branch> (creates and moves to new branch)
+
+# Merging branches -------------------------------------------
+git merge <Name of branch to merge to actual branch>
+
+# If there is a conflict after git merge:
+** Open the damn file and edit the canges manually
+git add .
+git commit  (do not use -m <Insert message>, and done!)
+
+# Pushing a repo to GitHub --------------------------------
+
+# First we need to create a GitHub repo with a name similar
+# to the local repository we have been already working on,
+# for the sake of sync. After that we do:
+
+git push <Insert URL of created repo> <Insert branch to push>
+
+# This creates an alias to avoid pasting the URL over and over again
+git remote add <Insert alias> <Insert URL of created repo>
+# Normally the alias is named 'origin'. Now you can use:
+git push <Created alias> <Insert branch to push>
+
+# Example: git remote add origin https://github.com/LOL/xdrepo.git
+	   git push origin master
+
+# Cloning an existing GitHub repo ---------------------------
+
+# First we need to go to a folder that does not have a .git
+# file (therefore virgin) and then run:
+
+git clone <Insert URL of created repo> (creates a folder with 
+					the GitHub repo name)
+cd <Insert name of GitHub repo so we go to that folder>
+
+# It is important to note that when we clone a repo, the
+# alias is automatically set to 'origin', so that we do not
+# have to worry again to copy the URL over and ober again
+
+git remote -v (checks the alias for fetching and pushing)
+
+# Pulling the contents of an already cloned repo ------------
+
+# It is suggested to pull branches everytime you plan to
+# make changes just in case someone has already modified smth
+
+git pull <Alias> <Name of branch to pull info>
+
+# TIP: before pushing changes you made locally to the master
+# branch of the remote repo, create a new branch and upload
+# that instead, so you can get feedback before merging those
+# changes into the master branch. In GitHub, that will appear
+# as pull requests and can be approved (therefore, merged) in
+# the same webpage.
+
+Steps: 1) git push origin new_feature (push request to branch)
+       2) Compare changes on GitHub webpage
+       3) Clic on Create Pull Request
+       4) Chat chat chat and make new Pushes to the same
+	  branch if new changes are needes
+       5) When everything is correct, Merge to 'master' and 
+	  eliminate old branch if you won't need it anymore
+
+# Forking and submitting other people's repos ---------------
+
+Steps:
+1) Locate the GitHub repo you want to copy and clic on Fork
+2) Wait until that repo is copied in your account
+3) When finished, go to the folder where you want to create
+   the Local REPO (usually by doing: cd ..)
+4) Clone the repo into your local drive:
+	git clone <Insert URL of repo in you account>
+5) cd <LOCATION OF CLONED REPO>
+   git status  (to check if everything is OK)
+6) Make changes. Save the files 
+7) 	git add .
+	git commit -m "new_changes_were_made"
+	git push origin master
+8) Go to GitHub webpage, check comparisons and merge branch
+9) When you want to upload changes to the original REPO where
+   you forked the files from, clic on "Make Pull Request".
+10) Wait for the creator to review those changes and accept
+    the merge pull request
+
+
+DONE! :)
+
+REFERENCE FOR THESE NOTES: 
+	"Git & GitHub Tutorial for Beginers", the awesome
+	Youtube series by The Net Ninja
+	Check it out!!!!
