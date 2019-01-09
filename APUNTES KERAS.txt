@@ -1,0 +1,16 @@
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.optimizers import SGD # El más básico
+
+lr, batch_size, epochs, num_batches
+
+model = Sequential ([ #codecodecodeTHOSElayers ])
+
+Dense(number_neurons_in_layer(lr), activation_function, *input_shape = (*tuple_dims*)*)
+
+model.compile(optimizer, loss_function, metrics_to_track) # EL CASCARON DEL MODELO
+
+model.summary
+
+log = model.fit(x, y, batch_size, epochs, validaton_data = [])
+

@@ -1,0 +1,73 @@
+Apuntes TensorFlow Alessandro
+
+import tensorflow as tf
+
+# Utilitarios que hacen sinergia con TF!
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+np.random.rand(shape).astype(np.float32) # núme
+np.random.normal(loc, scale, shape)
+
+% matplotlib inline
+% matplotlib notebook
+
+############################
+# A partir de acá TF puro! #
+############################
+
+# Definiciones de objetos:
+tf.constant()
+tf.Variable(initial_value) # el 'initial_value' debe tener el 'shape' deseado
+tf.placeholder(dtype, shape) # es obligatorio asignar un 'dtype'
+# dtype's comunes:
+tf.float32, tf.float64, tf.int8, tf.int16, tf.string, tf.bool
+# shapes comunes para los placeholders:
+None, [None, X.shape[1]], [n_rows, n_cols]
+# 'initial_value' comunes:
+tf.random_normal(shape, mean, stddev, name)
+
+# Operaciones básicas:
+tf.square()
+tf.add() # lo mismo que '+'
+tf.subtract() # lo mismo que '-'
+tf.matmul() # lo mismo que '@' en numpy (también puedo utilizar este operador en TF!)
+tf.assign() # actualiza valores de variables bajo demanda
+
+# Activaciones:
+tf.nn.sigmoid()
+
+# Configuraciones de entrenamiento (lr's y otros):
+tf.nn.exponential_decay() # importante ver documentación oficial para usarlo bien!!!
+
+# Pérdidas:
+loss = tf.reduce_mean(tf.square(y-yhat)) # MSE
+loss = tf.nn.l2_loss(y-yhat) # RMSE
+
+# Optimizadores y objeto de entrenamiento ('train')
+optimizer = tf.train.GradientDescentOptimizer()
+train = optimizer.minimize(loss)
+
+# Sesiones de ejecución:
+session = tf.Session()
+session.run(fetches, feed_dict) # 'fetches' admite listas y 'feed_dict' es de la forma: {objeto_placeholder_sin_comillas: <array, tensor, etc...>, ...}
+session.close()
+# Alternativa más práctica:
+with tf.Session() as sess:
+	init_op = tf.global_variables_initializer()
+	sess.run(init_op)
+	# do stuff
+
+# Funciones útiles para la evaluación del modelo y sus resultados:
+tf.equal() # tensor booleano element-wise
+tf.argmax() # retorna la etiqueta (integer) con mayor probabilidad. Ojo con 'axis'
+tf.cast() # convertir tensor a otro dtype
+
+# Summary's para TensorBoard:
+tf.summary.histogram()
+tf.summary.scalar()
+tf.summary.merge()
+tf.summary.FileWriter()
+tf.cast()
