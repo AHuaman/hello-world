@@ -1,0 +1,30 @@
+Apuntes docplex for Python - Alessandro
+
+from docplex.mp.model import Model
+
+m = Model()
+
+R = range(1,9) # Es un objeto 'range' útil para definir índices e iterar
+
+var_name = m.continuous_var() # Single. Puede cambiarse a 'integer_var' o 'binary_var'
+var_name = m.continuous_list()
+var_name = m.continuous_dict(idx) # Ej. de 'idx': [(i,j) for i in R for j in R]
+var_name = m.continuous_matrix()
+
+m.add_constraint(<exp>) # <exp> es una expresión lógica con '<=', '>=' o '=='
+# Ejemplo de <exp>: '0.2*desk+0.4*cell<=400'
+
+m.maximize()
+m.minimize()
+
+m.print_information() # cantidad de var's, restricciones, etc
+m.parameters.lpmethod = num # OPCIONAL. 'num' puede ser 1, 2 o 4 (primal, dual, barrier)
+s = m.solve(url, key, log_output = False) # 'True' para imprimir el log
+m.print_solution() # solución
+m.report()
+
+new_model_name = m.copy()
+new_var_name = new_model_name.get_var_by_name('var_name')
+constraint_object.rhs = 400 + overtime # cambiamos el 'rhs' de una restricción
+var_name.reduced_cost # imprime el costo reducido
+constraint_object.dual_price # imprime el precio dual
