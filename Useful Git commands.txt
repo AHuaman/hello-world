@@ -1,3 +1,10 @@
+REFERENCE FOR THESE NOTES: 
+	"Git & GitHub Tutorial for Beginers", the awesome
+	Youtube series by The Net Ninja
+	Check it out!!!!
+
+# These are my personal notes on common Git commands after 3 hours of Videos :/. I hope you find it useful!
+
 # Basic configuration ---------------------------------------
 
 git --version
@@ -52,7 +59,7 @@ git revert <Insert Commit ID found in git log>
 # can commit all of them in a single commit (therefore, 
 # reverting the reset if it is needed). BUT if you add
 # "--hard" at the end, it will erase ANY changes and not
-# record them (theyr will be lost forever):
+# record them (they will be lost forever):
 
 git reset <Insert Commit ID found in git log>  (dangerous)
 git reset <Same as above> --hard
@@ -92,7 +99,7 @@ git remote add <Insert alias> <Insert URL of created repo>
 # Normally the alias is named 'origin'. Now you can use:
 git push <Created alias> <Insert branch to push>
 
-# Example: git remote add origin https://github.com/LOL/xdrepo.git
+# Example: git remote add origin https://github.com/dummy_user/dummy_repo.git
 	   git push origin master
 
 # Cloning an existing GitHub repo ---------------------------
@@ -155,8 +162,3 @@ Steps:
 
 
 DONE! :)
-
-REFERENCE FOR THESE NOTES: 
-	"Git & GitHub Tutorial for Beginers", the awesome
-	Youtube series by The Net Ninja
-	Check it out!!!!

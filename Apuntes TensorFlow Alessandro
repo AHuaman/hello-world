@@ -8,8 +8,22 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
+from PIL import Image
+
+# Datasets:
+mnist = tf.keras.datasets.mnist()
+(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+# Números aleatorios:
 np.random.rand(shape).astype(np.float32) # núme
 np.random.normal(loc, scale, shape)
+
+# Para imágenes:
+im = Image.open(path)
+new_im = im.convert() # revisar docs. Cambia a greyscale, por ejemplo (usar mode="L")
+arr = np.asarray(new_im)
+imgplot = plt.imshow(arr, cmap='gray') # colores
+plt.show(imgplot)
 
 % matplotlib inline
 % matplotlib notebook
@@ -35,22 +49,32 @@ tf.add() # lo mismo que '+'
 tf.subtract() # lo mismo que '-'
 tf.matmul() # lo mismo que '@' en numpy (también puedo utilizar este operador en TF!)
 tf.assign() # actualiza valores de variables bajo demanda
+tf.cast() # conversión de 'dtypes'
+
 
 # Activaciones:
 tf.nn.sigmoid()
+tf.nn.softmax()
+tf.nn.tanh()
+tf.nn.relu()
+tf.nn.conv2d(input, filter, strides, padding) # ver docs para los 'shapes' de los args
 
 # Configuraciones de entrenamiento (lr's y otros):
 tf.nn.exponential_decay() # importante ver documentación oficial para usarlo bien!!!
 
 # Pérdidas:
-loss = tf.reduce_mean(tf.square(y-yhat)) # MSE
-loss = tf.nn.l2_loss(y-yhat) # RMSE
+loss = tf.reduce_mean(tf.square(y - yhat)) # MSE
+loss = tf.nn.l2_loss(y-yhat)
+loss = tf.reduce_mean(-tf.reduce_sum(y * tf.log(yhat), axis = 1)) # Cross-entropy probs
+loss = tf.nn.softmax_cross_entropy_with_logits_v2() # Cross-entropy one-hot logits
+loss = tf.nn.sparse_softmax_cross_entropy_with_logits() # Cross-entropy logits one-col-y
 
 # Optimizadores y objeto de entrenamiento ('train')
 optimizer = tf.train.GradientDescentOptimizer()
 train = optimizer.minimize(loss)
 
-# Sesiones de ejecución:
+## Sesiones de ejecución:
+# Differed execution:
 session = tf.Session()
 session.run(fetches, feed_dict) # 'fetches' admite listas y 'feed_dict' es de la forma: {objeto_placeholder_sin_comillas: <array, tensor, etc...>, ...}
 session.close()
@@ -60,14 +84,15 @@ with tf.Session() as sess:
 	sess.run(init_op)
 	# do stuff
 
+# Eager execution:
+sess = tf.InteractiveSession()
+
 # Funciones útiles para la evaluación del modelo y sus resultados:
 tf.equal() # tensor booleano element-wise
 tf.argmax() # retorna la etiqueta (integer) con mayor probabilidad. Ojo con 'axis'
-tf.cast() # convertir tensor a otro dtype
 
 # Summary's para TensorBoard:
 tf.summary.histogram()
 tf.summary.scalar()
 tf.summary.merge()
 tf.summary.FileWriter()
-tf.cast()
